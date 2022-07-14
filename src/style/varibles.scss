@@ -1,0 +1,65 @@
+
+// theme colors
+$grey-primary: #dfdfdf;
+$secondary: #333;
+$error: #d32752;
+$border-color:#d4d4d4;
+$nav-color:#58249c;
+
+$colors:(
+ "primary": $grey-primary,
+  "secondary": $secondary,
+  "error": $error,
+  "border-color":$border-color,
+  "card-p":#999,
+  "card-h3":#555,
+  "blue": #1919e6,
+  "red": #e61919,
+  "yellow": #e6e619,
+  "green": #19e635,
+  "orange": #ffa600,
+  "purple": #9900ff,
+  "gray": #808080,
+  "black": rgb(165, 60, 60),
+  "white": #fff,
+  "white-2":#e4e4e4,
+);
+//witdh
+$width-wide:75rem;//1200px
+// spacing
+$base-padding: 0.5rem;
+$padding-medium: 1rem;
+$base-margin: 0.75rem;
+
+// borders
+$base-border-thickness: 1px;
+$base-border-radius: 20px;
+
+// box-shadow
+$base-box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+
+// font sizes
+$base-font-size: 1rem;
+$font-size-sm: $base-font-size * 0.75;
+$font-size-lg: $base-font-size * 1.5;
+$font-size-xl: $base-font-size * 2;
+$font-size-xxl: $base-font-size * 3;
+//letter-spacing
+
+//transition
+$base-transition:0.1s;
+//layout
+$center:center;
+//mixin
+@mixin flx-row($justify:$center, $aling:$center){
+    display:flex;
+    justify-content:$justify;
+    align-items:$aling;
+    flex-wrap: wrap;
+}
+@mixin flx-col($justify:$center, $aling:$center){
+    display:flex;
+    justify-content:$justify;
+    align-items:$aling;
+    flex-flow: column wrap;
+}

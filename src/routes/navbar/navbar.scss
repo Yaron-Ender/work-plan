@@ -1,0 +1,24 @@
+.main-navbar{
+    background-color:$nav-color;
+    width:100vw;
+    padding:$base-padding*2 $padding-medium;
+    @include flx-row ($justify:space-between);
+    color:map-get($colors,'white');
+ & a{
+    text-decoration: none;
+   color:map-get($colors,'white');
+   border:$base-border-thickness solid currentcolor;
+   padding:$base-padding $padding-medium*1.2;
+   border-radius:$base-border-radius*0.3;
+   transition:$base-transition;
+   font: {
+    size:$font-size-lg;
+   }
+   &:hover{
+   background-color:map-get($colors,'white');
+    color:$nav-color;
+   border:$base-border-thickness solid $nav-color;
+   }
+ }
+
+}
