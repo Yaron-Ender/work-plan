@@ -1,0 +1,13 @@
+.homepage{
+ position:relative;
+ height:100vh;
+ @include flx-col;
+ background-color: $error; 
+ & h1{
+    margin: 100px auto 50px;
+ }
+ & img{
+width:100%;
+height:100%;
+ }
+}

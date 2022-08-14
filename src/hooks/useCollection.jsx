@@ -1,4 +1,4 @@
-import { getFirestore, collection, doc, getDocs,getDoc } from "firebase/firestore";
+import { collection, getDocs} from "firebase/firestore";
 import { db } from'../firebase/firebase'
 import { useState,useEffect} from "react";
 export const useCollection = (_collection) => {
@@ -14,7 +14,8 @@ export const useCollection = (_collection) => {
       }
       let arr=[]
     snapshot.docs.forEach((item)=>{
-      const obj = { data: item.data(), id: item.id };
+      //item.data() return the data inside obj
+      const obj = { id: item.id };
       arr.push(obj)
     })
     setData([...arr])

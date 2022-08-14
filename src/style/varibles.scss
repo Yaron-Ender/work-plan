@@ -5,6 +5,10 @@ $secondary: #333;
 $error: #d32752;
 $border-color:#d4d4d4;
 $nav-color:#58249c;
+$nav-color-dark:#3f1a71;
+$nav-color-light:#742fcd;
+$green-primary:#1f9751;
+$green-shine:#19e635;
 
 $colors:(
  "primary": $grey-primary,
@@ -13,14 +17,14 @@ $colors:(
   "border-color":$border-color,
   "card-p":#999,
   "card-h3":#555,
-  "blue": #1919e6,
-  "red": #e61919,
-  "yellow": #e6e619,
-  "green": #19e635,
+  "nav":$nav-color,
+  "nav-dark":$nav-color-dark,
+  "nav-light":$nav-color-light,
+  "green":$green-primary,
+  "green-shine":$green-shine,
   "orange": #ffa600,
   "purple": #9900ff,
   "gray": #808080,
-  "black": rgb(165, 60, 60),
   "white": #fff,
   "white-2":#e4e4e4,
 );

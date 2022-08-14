@@ -20,5 +20,15 @@
    border:$base-border-thickness solid $nav-color;
    }
  }
-
+ 
+ .login-link{
+ border:none;
+ font: {
+   family:'Poppins', sans-serif;;
+   weight:'Regular' 400;
+ }
+ &:hover{
+    font-weight:700;
+ }
+ }
 }

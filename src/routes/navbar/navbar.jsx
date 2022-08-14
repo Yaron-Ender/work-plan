@@ -7,6 +7,7 @@ const Navbar = () => {
           <NavLink to="database">database</NavLink>
           <NavLink to="/">assign job</NavLink>
           <NavLink to="workers">workers</NavLink>
+          <NavLink className='login-link' to="login">Login</NavLink>
         </nav>
         <Outlet />
       </div>
