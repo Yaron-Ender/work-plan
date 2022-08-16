@@ -1,12 +1,12 @@
-import React from 'react';
+import { useState } from "react";
 
 const FormInput = ({...otherProps}) => {
-    const{label} = otherProps
+ const{label} = otherProps
     return (
-        <div>
-         <label>{label}</label>
-          <input {...otherProps}
+        <div className='input-unit'>
+          <input className="form-input" {...otherProps}
           />  
+         <label htmlFor={label} className={`${otherProps.value?'shrink':""}`} >{label}</label>
         </div>
     );
 };

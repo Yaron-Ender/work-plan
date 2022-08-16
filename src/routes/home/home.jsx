@@ -1,22 +1,30 @@
 import { useState } from "react";
+import { Route,Routes,Link} from "react-router-dom";
 import Button from "../../component/button/button";
 import Login from "../login/Login";
-
+import laboratory from '../../asstes/laboratory.jpg'
+import Signup from "../signup/signup";
 const Home = () => {
-  const [ openLoginComp,setOpenLoginComp ] = useState(false)
-  console.log(openLoginComp)
-   const handleClick=()=>{
-setOpenLoginComp(true)
-   }
+
     return (
       <div className="homepage">
-        <h1>home</h1>
+        <nav className="login-navbar">
+          <div className="login-navbar-container">
+            <Link className="signup-link" to="signup">
+              signup
+            </Link>
+            <Link className="login-link" to="login">login</Link>
+          </div>
+        </nav>
         <div className="hero-img">
-          <img
-            src="https://via.placeholder.com/550X350"/>
+        <h1>home</h1>
+          <img src={laboratory} />
+          {/* <img src="https://via.placeholder.com/550X350" /> */}
         </div>
-      {!openLoginComp && ( <Button children={'Login'} buttonType={'login'} handleClick={handleClick} />)} 
-      {openLoginComp &&( <Login />)} 
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
       </div>
     );
 };

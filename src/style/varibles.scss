@@ -67,3 +67,9 @@ $center:center;
     align-items:$aling;
     flex-flow: column wrap;
 }
+@mixin shrinkLabel {
+  top: -0.08rem;
+  left:0;
+  font-size:1rem;
+  color: $secondary;
+}
