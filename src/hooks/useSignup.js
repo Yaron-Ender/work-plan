@@ -1,7 +1,9 @@
 import { auth } from '../firebase/firebase'
 import { useState } from 'react'
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useAuthContext } from './useAuthContext';
 export const useSignup = ()=>{
+    const { dispatch } = useAuthContext()
 const [error, setError] = useState(null);
 const [isPending, setIsPending] = useState(false);
  const signup = async(email,password,userName,employeeNum)=>
@@ -10,16 +12,23 @@ const [isPending, setIsPending] = useState(false);
   setError(null)
  try{
  const { user } = await createUserWithEmailAndPassword(auth, email, password);
- await updateProfile(user,{displayName:userName})
  if(!user){
      throw new Error('"could not complete sinup"');
  }
+ //update the user obj
+ await updateProfile(user,{displayName:userName})
+ //update AuthContext
+ dispatch({ type: "LOGIN", payload:[user,employeeNum]});
  setIsPending(false);
  setError(null);
- console.log(user)
  }catch(err){
-    setIsPending(false);
-setError(err.massage);
+setIsPending(false);
+if (err.code === "auth/email-already-in-use"){
+    setError("email already in use");
+}else{
+     setError("error, email or password are not valid");
+     console.log(err.message)
+}
  }
  }
  return { error,isPending,signup }

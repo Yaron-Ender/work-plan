@@ -88,7 +88,9 @@ setEmployeeNum(prev=>(prev=workersData.find(num => num==employeeNumber)))
           onChange={handleInput}
           required
         />
-        <Button children={"Signup"} />
+        {!isPending && <Button children={"Signup"} />}
+        {isPending && <Button disabled={'disabled'} children={"is pending..."} />}
+        {error && <p>{error}</p>}
       </form>
     </div>
   );

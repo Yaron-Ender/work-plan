@@ -7,12 +7,14 @@ const Button = ({children,...otherProps}) => {
     }
 
     return (
-        <button
-         className={`btn ${btnStyle[buttonType]}`}
-       onClick={handleClick}
-        > {children}
-        </button>
-       
+      <button
+        {...otherProps}
+        className={`btn ${btnStyle[buttonType]}`}
+        onClick={handleClick}
+      >
+        {" "}
+        {children}
+      </button>
     );
 };
 
