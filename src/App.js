@@ -11,7 +11,7 @@ const { user,AuthIsReady }=useAuthContext()
 
   return (
     <div className="App">
-        {AuthIsReady && (
+        {AuthIsReady&&(
       <Routes>
           <Route path="/" element={<Navbar />}>
             <Route index element={<Arragment />} />
@@ -21,11 +21,11 @@ const { user,AuthIsReady }=useAuthContext()
         </Routes>
         ) 
         }
-        {!AuthIsReady&&
+        {!AuthIsReady&&(
           <Routes>
             <Route path='/home/*' element={<Home />} />
           </Routes>
-        
+        )
         }
     </div>
   );

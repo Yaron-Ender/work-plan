@@ -10,6 +10,8 @@ const authReducer =(state,action)=>{
         return {...state,user:payload[0],employeeNum:payload[1]}
     case 'AUTH_IS_READY':
       return { ...state,AuthIsReady:true, user: payload };
+   case 'LOGOUT':
+      return{...state,AuthIsReady:null}
     default:
         return state
  }
