@@ -3,17 +3,22 @@ import { Outlet,NavLink } from "react-router-dom";
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useLogout } from '../../hooks/useLogout';
 const Navbar = () => {
-   const { logout } = useLogout()
+   const { logout,error} = useLogout()
   const { user } = useAuthContext()
 
     return (
       <div>
         <nav className="main-navbar">
-          <NavLink to="database">database</NavLink>
-          <NavLink to="/">assign job</NavLink>
-          <NavLink to="workers">workers</NavLink>
-          {user&&<span>hellow {user.displayName}</span>}
+          {!error&&(
+           <>
+            <NavLink to="database">database</NavLink>
+            <NavLink to="/">assign job</NavLink>
+            <NavLink to="workers">workers</NavLink>
+            {user&&<span>hello {user.displayName}</span>}
+           </>
+          )}
           <p onClick={logout} className='login-link'>Logout</p>
+          {error&&<p>{error}</p>}
         </nav>
         <Outlet />
       </div>

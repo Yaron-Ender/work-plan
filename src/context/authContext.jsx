@@ -11,7 +11,8 @@ const authReducer =(state,action)=>{
     case 'AUTH_IS_READY':
       return { ...state,AuthIsReady:true, user: payload };
    case 'LOGOUT':
-      return{...state,AuthIsReady:null}
+      return{...state,user:null,
+      user:null}
     default:
         return state
  }
@@ -29,7 +30,7 @@ useEffect(()=>{
   const unsub = onAuthStateChanged(auth,(user)=>{
  dispatch({ type: "AUTH_IS_READY", payload: user });
  //cleanup function
- unsub();
+ return unsub();
   })
 },[dispatch])
     return(

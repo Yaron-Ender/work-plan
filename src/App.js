@@ -1,34 +1,42 @@
 import './App.scss';
-import { Routes,Route} from "react-router-dom";
+import { Routes,Route,useNavigate} from "react-router-dom";
 import Navbar from './routes/navbar/navbar';
 import Home from './routes/home/home';
 import Database from './routes/database/database';
 import Workers from './routes/workers/workers';
 import Arragment from './routes/work-arragment/Arragment';
 import { useAuthContext } from'./hooks/useAuthContext'
+import { useEffect } from 'react';
 function App() {
+   const navigate = useNavigate();
 const { user,AuthIsReady }=useAuthContext()
-
-  return (
-    <div className="App">
-        {AuthIsReady&&(
-      <Routes>
-          <Route path="/" element={<Navbar />}>
-            <Route index element={<Arragment />} />
-            <Route path="database/*" element={<Database />} />
-            <Route path="workers" element={<Workers />} />
-          </Route>
-        </Routes>
-        ) 
-        }
-        {!AuthIsReady&&(
+useEffect(()=>{
+  if(user){navigate("/")}
+  if(!user){navigate("/home")}
+},[user])
+return (
+  <div className="App">
+    {AuthIsReady && (
+      <>
+        {user && (
           <Routes>
-            <Route path='/home/*' element={<Home />} />
+            <Route path="/" element={<Navbar />}>
+              <Route index element={<Arragment />} />
+              <Route path="database/*" element={<Database />} />
+              <Route path="workers" element={<Workers />} />
+            </Route>
           </Routes>
-        )
-        }
-    </div>
-  );
+        )}
+        {!user && (
+          <Routes>
+            <Route path="/home/*" element={<Home />} />
+          </Routes>
+        )}
+      </>
+    )}
+  </div>
+);
 }
 
 export default App;
+

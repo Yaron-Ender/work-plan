@@ -19,6 +19,7 @@ const [isPending, setIsPending] = useState(false);
  await updateProfile(user,{displayName:userName})
  //update AuthContext
  dispatch({ type: "LOGIN", payload:[user,employeeNum]});
+ 
  setIsPending(false);
  setError(null);
  }catch(err){
