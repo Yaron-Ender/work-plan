@@ -1,22 +1,23 @@
 import { useState } from "react";   
 import Button from "../../component/button/button";
 import FormInput from "../../component/form-input/input.comp";
-
+import { useLogin } from "../../hooks/useLogin";
 const Login = () => {
-
-  const defaultInput={
-    userNumber:'',
-    password:''
-  }
+const { login,isPending,error } = useLogin();
+  const defaultInput = {
+    email:"",
+    employeeNumber:"",
+    password: "",
+  };
   const [inputFields, setInputFields] = useState(defaultInput);
-  const{userNumber,password}=inputFields;
+  const { employeeNumber, email, password } = inputFields;
   const handleInput =(e)=>{
      const{name,value}=e.target
      setInputFields(prev=>({...prev,[name]:value}))
-     console.log(inputFields)
   }
   const handleSubmit = (e)=>{
   e.preventDefault()
+  login(email,password,employeeNumber)
   setInputFields(defaultInput)
   }
     return (
@@ -24,14 +25,23 @@ const Login = () => {
         <h2>log in</h2>
         <form className="login-form" onSubmit={handleSubmit}>
           <FormInput
-            id="user number"
-            label="user number"
-            type="Number"
-            name="userNumber"
-            value={userNumber}
+            id="email"
+            label="email"
+            type="email"
+            name="email"
+            value={email}
             onChange={handleInput}
             required
-            />
+          />
+          <FormInput
+            id="Employee Number"
+            label="Employee Number"
+            type="number"
+            name="employeeNumber"
+            value={employeeNumber}
+            onChange={handleInput}
+            required
+          />
           <FormInput
             id="password"
             label="password"
@@ -40,11 +50,14 @@ const Login = () => {
             value={password}
             onChange={handleInput}
             required
-            />
-        <p>forgot password ? click <span>here</span></p>
-        <Button children={'Login'}/>
+          />
+          <p>
+            forgot password ? click <span>here</span>
+          </p>
+          {!isPending && <Button children={"Login"} />}
+        {isPending && <Button disabled={'disabled'} children={"loading..."} />}
+          {error && <p>{error}</p>}
         </form>
-    
       </div>
     );
 };
