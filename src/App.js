@@ -9,7 +9,7 @@ import { useAuthContext } from'./hooks/useAuthContext'
 import { useEffect } from 'react';
 function App() {
    const navigate = useNavigate();
-const { user,AuthIsReady }=useAuthContext()
+const { user,AuthIsReady,manager }=useAuthContext()
 useEffect(()=>{
   if(user){navigate("/")}
   if(!user){navigate("/home")}
