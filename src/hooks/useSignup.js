@@ -6,7 +6,7 @@ export const useSignup = ()=>{
     const { dispatch } = useAuthContext()
 const [error, setError] = useState(null);
 const [isPending, setIsPending] = useState(false);
- const signup = async(email,password,userName,employeeNum)=>
+ const signup = async(email,password,userName,employeeNum,isManager)=>
  {
   setIsPending(true)
   setError(null)
@@ -18,7 +18,7 @@ const [isPending, setIsPending] = useState(false);
  //update the user obj
  await updateProfile(user,{displayName:userName})
  //update AuthContext
- dispatch({ type: "LOGIN", payload:[user,employeeNum]});
+ dispatch({ type: "LOGIN", payload:{user,employeeNum,isManager}});
  
  setIsPending(false);
  setError(null);

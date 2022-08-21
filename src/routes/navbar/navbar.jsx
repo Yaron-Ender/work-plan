@@ -4,8 +4,8 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { useLogout } from '../../hooks/useLogout';
 const Navbar = () => {
    const { logout,error} = useLogout()
-  const { user } = useAuthContext()
-
+  const { user,manager,employeeNum } = useAuthContext()
+ console.log(manager,user,employeeNum)
     return (
       <div>
         <nav className="main-navbar">

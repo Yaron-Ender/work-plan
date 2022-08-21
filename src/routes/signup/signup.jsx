@@ -1,10 +1,12 @@
 import { useState,useEffect } from "react";
 import FormInput from "../../component/form-input/input.comp";
 import Button from "../../component/button/button";
-import { workersData } from "../../asstes/workers-data";
+import { workersID } from "../../asstes/workers-ID-Numbers"; 
 import { useSignup } from "../../hooks/useSignup";
+import { useISManager } from "../../hooks/useIsManager";
 const Signup = () => {
   const { error,isPending,signup } = useSignup()
+  // console.log(isManager)
   const defaultInput = {
     userName: "",
     email:'',
@@ -16,22 +18,31 @@ const Signup = () => {
   const [employeeNum,setEmployeeNum] =useState(null)
   const [comparePS,setComparePS] = useState(false)
   const { userName,email, employeeNumber,password, confirmPassword } = inputFields;
-useEffect(()=>{
+  const { isManager,manager } = useISManager()
+  useEffect(()=>{
   setComparePS(false)
   if(password===confirmPassword){
     setComparePS(true)
   }
-setEmployeeNum(prev=>(prev=workersData.find(num => num==employeeNumber)))
-},[password,confirmPassword,employeeNum])
+  setEmployeeNum(prev=>(prev=workersID.find(num => num==employeeNumber)))
+  //find if employee is manager
+  if (employeeNum) {
+    if(employeeNum.length==6)
+    console.log(employeeNum,employeeNum.length);
+  manager(employeeNum);
+}
+},[password,confirmPassword,employeeNum,isManager])
+
+//update theinputField state
   const handleInput = (e) => {
     const { name, value } = e.target;
     setInputFields((prev) => ({ ...prev, [name]: value }));
-    // console.log(inputFields);
   };
   const handleSubmit =async(e)=>{
     e.preventDefault();
+    
     if (comparePS && employeeNum) {
-      await signup(email,password,userName,employeeNum);
+      await signup(email,password,userName,employeeNum,isManager);
       setComparePS(false)
       setEmployeeNum(null)
       setInputFields(defaultInput);
