@@ -7,8 +7,8 @@ const authReducer =(state,action)=>{
     const {type,payload}=action
  switch(type){
     case 'LOGIN':
-        return {...state,user:payload[0],employeeNum:payload[1],
-      manager:payload[2]}
+        return {...state,user:payload.user,employeeNum:payload.employeeNum,
+      manager:payload.isManager}
     case 'AUTH_IS_READY':
       return { ...state,AuthIsReady:true, user: payload };
    case 'LOGOUT':
