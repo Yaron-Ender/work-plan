@@ -28,7 +28,6 @@ const Signup = () => {
   //find if employee is manager
   if (employeeNum) {
     if(employeeNum.length==6)
-    console.log(employeeNum,employeeNum.length);
   manager(employeeNum);
 }
 },[password,confirmPassword,employeeNum,isManager])

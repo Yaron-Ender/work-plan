@@ -7,12 +7,12 @@ import Workers from './routes/workers/workers';
 import Arragment from './routes/work-arragment/Arragment';
 import { useAuthContext } from'./hooks/useAuthContext'
 import { useEffect } from 'react';
+import Substance from './routes/singal-substance/Substance';
 function App() {
    const navigate = useNavigate();
 const { user,AuthIsReady,manager }=useAuthContext()
 useEffect(()=>{
-  if(user){navigate("/")}
-  if(!user){navigate("/home")}
+  (user) ? navigate("/") : navigate("home/*");
 },[user])
 return (
   <div className="App">
@@ -22,7 +22,7 @@ return (
           <Routes>
             <Route path="/" element={<Navbar />}>
               <Route index element={<Arragment />} />
-              <Route path="database/*" element={<Database />} />
+              <Route path="/database/*" element={<Database />} />
               <Route path="workers" element={<Workers />} />
             </Route>
           </Routes>

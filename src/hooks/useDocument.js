@@ -1,9 +1,9 @@
 import { collection, getDocs} from "firebase/firestore";
 import { db } from'../firebase/firebase'
 import { useState,useEffect} from "react";
-export const useCollection = (_collection) => {
-    const[data,setData]=useState([])
-
+export const useDocument = (_collection) => {
+    const[subID,setSubID]=useState([])
+//find Document ID
     useEffect(()=>{
       if(_collection){
     try{
@@ -18,14 +18,13 @@ export const useCollection = (_collection) => {
       const obj = { id: item.id };
       arr.push(obj)
     })
-    setData([...arr])
+    setSubID([...arr])
    });
  }catch(err){
 console.log(err.name)
  }
 }
     },[_collection])
-
-    return {data}
+    return {subID}
 };
 

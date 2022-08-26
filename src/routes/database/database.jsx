@@ -1,51 +1,31 @@
 import { useState } from "react";
-import { useCollection } from "../../hooks/useCollection";
-// import FormInput from "../../component/form-input/input.comp";
+import { Routes, Route} from "react-router-dom";
+import { useDocument } from "../../hooks/useDocument";
 import Button from "../../component/button/button";
 import SubstancesList from "../../component/substancesList/substancesList";
-
+import Substance from "../singal-substance/Substance";
+import { useGetFromCollection } from '../../hooks/useGetFromCollection'
 
 const Database = () => {
-  const defaultFormField = {substance:""}
-  //states
-  const [formField,setFormField] = useState(defaultFormField);
-  const [idArray,setIdAraay]=useState(null);
-  const {substance} = formField
-  //customUse
- const {data}=useCollection('substances')
-//  console.log(data)
-
+  //customHooks
+ const { getdocID,arrayOfDocID} = useGetFromCollection()
  //functions
-const handleChange=(e)=>{
- const {value,name} = e.target
- setFormField({...formField,[name]:value})
-}
 const seeAllDoc=()=>{
-  // console.log("hat");
-setIdAraay(data)
+// gurd that prevent send request to firestore if we got already data, so after data has been recive clicking on the btn will not work and therefor substancesList comp will not form more and more <Navlink/>
+if(arrayOfDocID.length==0){
+  getdocID("substances");
+}
 }
   return (
     <div>
-      <div className="databse-title"> 
-      <h1>SUBSTANCES DATABASE</h1>
+      <div className="databse-title">
+        <h1>SUBSTANCES DATABASE</h1>
       </div>
-        <Button 
-        children='All substance'
-        onClick={seeAllDoc}
-        />
-        <SubstancesList substances={idArray}/>
-      {/* <div className="form-container">
-        <form>
-          <FormInput
-           label='substance'
-          type='text'
-          name='substance'
-          onChange={handleChange}
-          placeholder='test'
-          value={substance}
-          />
-        </form>
-      </div> */}
+      <Button children="All substance" onClick={seeAllDoc} />
+      <SubstancesList substancesID={arrayOfDocID} />
+      <Routes>
+        <Route path=":id" element={<Substance />} />
+      </Routes>
     </div>
   );
 };

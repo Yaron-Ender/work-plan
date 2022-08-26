@@ -1,16 +1,24 @@
+import { async } from "@firebase/util";
 import { NavLink } from "react-router-dom";
+import { useGetFromCollection } from "../../hooks/useGetFromCollection";
+const SubstancesList = ({ substancesID }) => {
+const { getdocContent } = useGetFromCollection();
+const handleClick =async (id)=>{
 
-
-const SubstancesList = ({ substances }) => {
-
+   await getdocContent("substances", id);
+}
   return (
     <div>
-     {substances &&(
+     {substancesID &&(
       <>
       <h1>hai</h1>
       <nav>
-       {substances.map((item)=>(
-        <NavLink to={`${item.id}`}>{item.id}</NavLink>
+       {substancesID.map((subID)=>(
+        <NavLink 
+        key={subID}
+         to={subID}
+         onClick={()=>{handleClick(subID)}}
+         >{subID}</NavLink>
         ))}
       </nav>
       </>

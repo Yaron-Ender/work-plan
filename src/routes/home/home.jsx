@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route,Routes,Link} from "react-router-dom";
+import { Route,Routes,Link,Outlet} from "react-router-dom";
 import Button from "../../component/button/button";
 import Login from "../login/Login";
 import laboratory from '../../asstes/laboratory.jpg'
@@ -18,6 +18,7 @@ const Home = () => {
         </nav>
         <div className="hero-img">
         <h1>home</h1>
+        <Outlet/>
           <img src={laboratory} />
           {/* <img src="https://via.placeholder.com/550X350" /> */}
         </div>

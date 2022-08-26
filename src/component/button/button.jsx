@@ -1,6 +1,6 @@
 
 const Button = ({children,...otherProps}) => {
-    const{buttonType,handleClick}= {...otherProps}
+    const{buttonType}= {...otherProps}
     let btnStyle={
      login:'login',
      primary:'primary'
@@ -10,7 +10,6 @@ const Button = ({children,...otherProps}) => {
       <button
         {...otherProps}
         className={`btn ${btnStyle[buttonType]}`}
-        onClick={handleClick}
       >
         {" "}
         {children}

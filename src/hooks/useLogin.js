@@ -12,9 +12,8 @@ const login=async(email,password,employeeNum)=>{
    setIspending(true)
    try{
    const {user} = await signInWithEmailAndPassword(auth,email,password)
-   console.log(user,employeeNum)
  if(!user)return
- dispatch({ type:"LOGIN",payload:[user, employeeNum]});
+ dispatch({ type:"LOGIN",payload:{user, employeeNum}});
  setError(false);
  setIspending(null);
    }catch(err){
