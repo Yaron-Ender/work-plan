@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import FormInput from "../../component/form-input/input.comp";
+import FormInput from "../../component/input/input.comp";
 import Button from "../../component/button/button";
 import { workersID } from "../../asstes/workers-ID-Numbers"; 
 import { useSignup } from "../../hooks/useSignup";
@@ -98,8 +98,14 @@ const Signup = () => {
           onChange={handleInput}
           required
         />
-        {!isPending && <Button children={"Signup"} />}
-        {isPending && <Button disabled={'disabled'} children={"loading..."} />}
+        {!isPending && <Button children={"Signup"} buttonType="login" />}
+        {isPending && (
+          <Button
+            disabled={"disabled"}
+            children={"loading..."}
+            buttonType="login"
+          />
+        )}
         {error && <p>{error}</p>}
       </form>
     </div>

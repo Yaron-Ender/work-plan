@@ -1,6 +1,31 @@
-.databse-title{
+.database{
+ @include flx-col();
+& .databse-title{
 letter-spacing:$base-font-size*.5;
-margin-top:1em;
+margin-top:0em;
 text-align: center;
 color:$secondary;
+}
+& .database-navbar{
+ position: absolute;
+background-color:map-get($colors,'white');
+ width:100vw;
+ padding:$base-padding*2 $padding-medium;
+  border:none;
+  box-shadow:inset 0px 15px 1.5em -0.5em rgba(0,0,0,1);
+ @include flx-row();
+ top:0;
+ z-index:0;
+ &.open{
+ transition:all 0.2s;
+ top:75px;
+ }
+  &.close{
+ transition-delay:0.4s;
+ transform: translateY(-30px);
+ }
+}
+& .database-substances-container{
+ margin:2rem auto 0
+}
 }

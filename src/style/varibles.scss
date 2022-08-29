@@ -1,14 +1,18 @@
 
 // theme colors
-$grey-primary: #dfdfdf;
+$grey-primary:#f7f7f7;
+$grey-secondary: #dfdfdf;
+$grey-third:#dedede;
 $secondary: #333;
 $error: #d32752;
 $border-color:#d4d4d4;
-$nav-color:#58249c;
+$nav-color:#9c88ff;
+$nav-color-2:#58249c;
 $nav-color-dark:#3f1a71;
 $nav-color-light:#742fcd;
 $green-primary:#1f9751;
 $green-shine:#19e635;
+$database-navbar:#f190d4;
 
 $colors:(
  "primary": $grey-primary,
@@ -22,9 +26,10 @@ $colors:(
   "nav-light":$nav-color-light,
   "green":$green-primary,
   "green-shine":$green-shine,
+  "database-navbar":$database-navbar,
   "orange": #ffa600,
   "purple": #9900ff,
-  "gray": #808080,
+  "gray":$grey-third,
   "white": #fff,
   "white-2":#e4e4e4,
 );

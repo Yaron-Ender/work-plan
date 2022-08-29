@@ -1,4 +1,6 @@
 .main-navbar{
+   position: relative;
+   z-index:1;
     background-color:$nav-color;
     width:100vw;
     padding:$base-padding*2 $padding-medium;
