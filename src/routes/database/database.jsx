@@ -11,7 +11,7 @@ const Database = () => {
  const { getdocID,arrayOfDocID} = useGetFromCollection()
  //functions
 const seeAllDoc=()=>{
-// gurd that prevent send request to firestore if we got already data, so after data has been recive clicking on the btn will not work and therefor substancesList comp will not form more and more <Navlink/>
+// a gurd that prevent sending request to firestore if we got already data, so after data has been recive, clicking on the btn will not work and therefor substancesList comp will not form more and more <Navlink/> comp.
 if(arrayOfDocID.length==0){
   getdocID("substances");
 }
