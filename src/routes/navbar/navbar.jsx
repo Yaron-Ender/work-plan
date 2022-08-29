@@ -1,8 +1,10 @@
-import React from 'react';
+import { useState,useContext} from 'react';
 import { Outlet,NavLink } from "react-router-dom";
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useLogout } from '../../hooks/useLogout';
+import { useStyleContext } from '../../hooks/useStyleContext';
 const Navbar = () => {
+const { dispatch } = useStyleContext()
    const { logout,error} = useLogout()
   const { user,manager,employeeNum } = useAuthContext()
     return (
@@ -10,8 +12,12 @@ const Navbar = () => {
         <nav className="main-navbar">
           {!error&&(
            <>
-            <NavLink to="database">database</NavLink>
-            <NavLink to="/">assign job</NavLink>
+            <NavLink to="database"
+            onClick={()=>{dispatch({type:"OPEN_DATABASE_NAVBAR"})}}
+            >database</NavLink>
+            <NavLink to="/"
+            onClick={()=>{dispatch({ type: 'CLOSE_DATABASE_NAVBAR' })}}
+            >assign job</NavLink>
             <NavLink to="workers">workers</NavLink>
             {user&&<span>hello {user.displayName}</span>}
            </>

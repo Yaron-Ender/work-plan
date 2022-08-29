@@ -17,16 +17,30 @@ border:$base-border-thickness solid currentcolor;
 .btn {
   display:inline-block;
   background: none;
-  border:$base-border-thickness*2 solid currentcolor;;
+  color:map-get($colors,'gray');
+  border:$base-border-thickness*2 solid currentcolor;
   padding:$base-padding $padding-medium*.75;
   border-radius: 4px;
-  color:map-get($colors,'green' );
   font-weight: bold;
   cursor: pointer;
   font-size: 1em;
-}
-.btn:hover {
+  &.login{
+    color:map-get($colors,'green' );
+    &:hover{
   background:map-get($colors,'green' );
   color:map-get($colors,'white' );
   border:none;
+    }
+  }
+ &.substance{
+  color:$nav-color;
+  padding:$base-padding*1.2 $padding-medium*1.2;
+   border-radius:$base-border-radius*0.3;
+   transition:$base-transition;
+   &:hover{
+    background-color:$nav-color;
+    color:map-get($colors,'white' );
+   }
+ }
 }
+

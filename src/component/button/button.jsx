@@ -3,7 +3,7 @@ const Button = ({children,...otherProps}) => {
     const{buttonType}= {...otherProps}
     let btnStyle={
      login:'login',
-     primary:'primary'
+     substance:'substance'
     }
 
     return (
@@ -11,7 +11,6 @@ const Button = ({children,...otherProps}) => {
         {...otherProps}
         className={`btn ${btnStyle[buttonType]}`}
       >
-        {" "}
         {children}
       </button>
     );

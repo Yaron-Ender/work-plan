@@ -1,6 +1,6 @@
 import { useState } from "react";   
 import Button from "../../component/button/button";
-import FormInput from "../../component/form-input/input.comp";
+import FormInput from "../../component/input/input.comp";
 import { useLogin } from "../../hooks/useLogin";
 const Login = () => {
 const { login,isPending,error } = useLogin();
@@ -54,8 +54,14 @@ const { login,isPending,error } = useLogin();
           <p>
             forgot password ? click <span>here</span>
           </p>
-          {!isPending && <Button children={"Login"} />}
-        {isPending && <Button disabled={'disabled'} children={"loading..."} />}
+          {!isPending && <Button children="Login" buttonType="login" />}
+          {isPending && (
+            <Button
+              disabled={"disabled"}
+              children="loading..."
+              buttonType="login"
+            />
+          )}
           {error && <p>{error}</p>}
         </form>
       </div>
