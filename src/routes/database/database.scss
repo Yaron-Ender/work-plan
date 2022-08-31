@@ -20,10 +20,6 @@ background-color:map-get($colors,'white');
  transition:all 0.2s;
  top:75px;
  }
-  &.close{
- transition-delay:0.4s;
- transform: translateY(-30px);
- }
 }
 & .database-substances-container{
  margin:2rem auto 0

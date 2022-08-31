@@ -5,18 +5,17 @@ import SubstancesList from "../../component/substancesList/substancesList";
 import Substance from "../singal-substance/Substance";
 import { useGetFromCollection } from '../../hooks/useGetFromCollection'
 import Search from "../../component/input/Search";
-import { useStyleContext } from "../../hooks/useStyleContext";
 import { useEffect } from "react";
+import { useStyle } from '../../hooks/useStyle'
 const Database = () => {
-  const [open,setOpen]=useState(false)
- const { openDatabaseNav } = useStyleContext()
- useEffect(()=>{
-  
-if(openDatabaseNav){
-  setTimeout(()=>{setOpen(true)},10)
-}
-
- },[openDatabaseNav,open])
+const { openDatabaseNavbar,openDatabaseNavState } = useStyle();
+const [open,setOpen]=useState(false)
+ useEffect(() => {
+   if (openDatabaseNavState) {
+   setTimeout(() => {setOpen(true)}, 10);
+   }
+   openDatabaseNavbar()
+ }, [openDatabaseNavState,open]);
   //customHooks
  const { getdocID,arrayOfDocID} = useGetFromCollection()
  //functions
@@ -24,12 +23,11 @@ const seeAllDoc=()=>{
 // a gurd that prevent sending request to firestore if we got already data, so after data has been recive, clicking on the btn will not work and therefor substancesList comp will not form more and more <Navlink/> comp.
 if(arrayOfDocID.length==0){
   getdocID("substances");
-  console.log('dsfsdfsdfsdfsdf')
 }
 }
   return (
     <div className="database">
-      <nav className={`database-navbar ${(open)?'open':"close"}`}>
+      <nav className={`database-navbar ${(open)?'open':""}`}>
         <Button children="new substanca" buttonType='substance' />
 
         <Button
