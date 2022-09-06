@@ -1,6 +1,6 @@
 
 const Button = ({children,...otherProps}) => {
-    const{buttonType}= {...otherProps}
+    const{buttontype}= {...otherProps}
     let btnStyle={
      login:'login',
      substance:'substance'
@@ -9,7 +9,7 @@ const Button = ({children,...otherProps}) => {
     return (
       <button
         {...otherProps}
-        className={`btn ${btnStyle[buttonType]}`}
+        className={`btn ${btnStyle[buttontype]}`}
       >
         {children}
       </button>

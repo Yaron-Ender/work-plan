@@ -6,7 +6,7 @@ import { useStyle } from '../../hooks/useStyle';
 const Navbar = () => {
 const { openDatabaseNavbar } = useStyle()
    const { logout,error} = useLogout()
-  const { user,manager,employeeNum } = useAuthContext()
+  const { user,manager } = useAuthContext()
     return (
       <div>
         <nav className="main-navbar">

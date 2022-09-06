@@ -54,12 +54,12 @@ const { login,isPending,error } = useLogin();
           <p>
             forgot password ? click <span>here</span>
           </p>
-          {!isPending && <Button children="Login" buttonType="login" />}
+          {!isPending && <Button children="Login" buttontype="login" />}
           {isPending && (
             <Button
               disabled={"disabled"}
               children="loading..."
-              buttonType="login"
+              buttontype="login"
             />
           )}
           {error && <p>{error}</p>}

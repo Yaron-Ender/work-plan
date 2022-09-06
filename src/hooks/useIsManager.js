@@ -6,9 +6,8 @@ export const useISManager = ()=>{
     const findManager = workersID.find((num) => num === employeeNum);
 
     switch (findManager) {
-      case "888888":
-        return setIsManager(true);
-      case "999999":
+      case "000000":
+      case "123123":
         return setIsManager(true);
       default:
         setIsManager(null);

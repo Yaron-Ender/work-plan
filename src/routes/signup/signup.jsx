@@ -39,7 +39,6 @@ const Signup = () => {
   };
   const handleSubmit =async(e)=>{
     e.preventDefault();
-    
     if (comparePS && employeeNum) {
       await signup(email,password,userName,employeeNum,isManager);
       setComparePS(false)
@@ -98,12 +97,12 @@ const Signup = () => {
           onChange={handleInput}
           required
         />
-        {!isPending && <Button children={"Signup"} buttonType="login" />}
+        {!isPending && <Button children={"Signup"} buttontype="login" />}
         {isPending && (
           <Button
             disabled={"disabled"}
             children={"loading..."}
-            buttonType="login"
+            buttontype="login"
           />
         )}
         {error && <p>{error}</p>}

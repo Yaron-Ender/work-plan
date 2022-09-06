@@ -14,7 +14,6 @@ const { user,AuthIsReady,manager }=useAuthContext()
 useEffect(()=>{
   (user) ? navigate("/") : navigate("home/*");
 },[user])
-
 return (
   <div className="App">
     {AuthIsReady && (

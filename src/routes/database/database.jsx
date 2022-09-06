@@ -17,23 +17,23 @@ const [open,setOpen]=useState(false)
    openDatabaseNavbar()
  }, [openDatabaseNavState,open]);
   //customHooks
- const { getdocID,arrayOfDocID} = useGetFromCollection()
+ const { getdocsID,arrayOfDocID} = useGetFromCollection()
  //functions
 const seeAllDoc=()=>{
 // a gurd that prevent sending request to firestore if we got already data, so after data has been recive, clicking on the btn will not work and therefor substancesList comp will not form more and more <Navlink/> comp.
 if(arrayOfDocID.length==0){
-  getdocID("substances");
+  getdocsID("substances");
 }
 }
   return (
     <div className="database">
       <nav className={`database-navbar ${(open)?'open':""}`}>
-        <Button children="new substanca" buttonType='substance' />
+        <Button children="new substanca" buttontype='substance' />
 
         <Button
           children="All substance"
           onClick={seeAllDoc}
-           buttonType="substance"
+           buttontype="substance"
         />
         <Search />
       </nav>
