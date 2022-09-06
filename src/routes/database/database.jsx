@@ -1,29 +1,25 @@
-import { useState} from "react";
+import { useState,useEffect} from "react";
 import { Routes, Route} from "react-router-dom";
-import Button from "../../component/button/button";
-import SubstancesList from "../../component/substancesList/substancesList";
-import Substance from "../singal-substance/Substance";
-import { useGetFromCollection } from '../../hooks/useGetFromCollection'
-import Search from "../../component/input/Search";
-import { useEffect } from "react";
+import { useCollection } from "../../hooks/useCollection";
 import { useStyle } from '../../hooks/useStyle'
+import Button from "../../component/button/button";
+import SubstancesList from "./substancesList";
+import Substance from './Substance';
+import Search from "../../component/input/Search";
 const Database = () => {
 const { openDatabaseNavbar,openDatabaseNavState } = useStyle();
+const { arrayOfDocID } =useCollection('substances')
 const [open,setOpen]=useState(false)
+const [resultOfCollection,setResultOfCollection]=useState(null)
  useEffect(() => {
    if (openDatabaseNavState) {
    setTimeout(() => {setOpen(true)}, 10);
    }
    openDatabaseNavbar()
  }, [openDatabaseNavState,open]);
-  //customHooks
- const { getdocsID,arrayOfDocID} = useGetFromCollection()
  //functions
 const seeAllDoc=()=>{
-// a gurd that prevent sending request to firestore if we got already data, so after data has been recive, clicking on the btn will not work and therefor substancesList comp will not form more and more <Navlink/> comp.
-if(arrayOfDocID.length==0){
-  getdocsID("substances");
-}
+setResultOfCollection(arrayOfDocID)
 }
   return (
     <div className="database">
@@ -38,11 +34,11 @@ if(arrayOfDocID.length==0){
         <Search />
       </nav>
       <div className="database-substances-container">
-      <SubstancesList substancesID={arrayOfDocID} />
+      <SubstancesList substancesID={resultOfCollection} />
+      </div>
       <Routes>
         <Route path=":id" element={<Substance />} />
       </Routes>
-      </div>
     </div>
   );
 };

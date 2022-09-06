@@ -22,6 +22,20 @@ background-color:map-get($colors,'white');
  }
 }
 & .database-substances-container{
- margin:6rem auto 0
+    border:$base-border-thickness solid red;
+    width: 95%;
+ margin:6rem auto 0;
+& .substancesList{
+    display:flex;
+    flex-wrap:wrap;
+    padding:$base-padding;
+& a{
+    padding:0 $padding-medium;
+    border-right:$base-border-thickness solid $nav-color-2;
+    color:$nav-color-2;
+    font-family:Arapey,Raleway,sans-serif;
+    font-size:1.8rem;
+}
+}
 }
 }
