@@ -1,30 +1,25 @@
-import { collection, getDocs} from "firebase/firestore";
+import { doc,onSnapshot} from "firebase/firestore";
 import { db } from'../firebase/firebase'
 import { useState,useEffect} from "react";
-export const useDocument = (_collection) => {
-    const[subID,setSubID]=useState([])
-//find Document ID
-    useEffect(()=>{
-      if(_collection){
-    try{
-   const colref = collection(db,_collection);
-   getDocs(colref).then((snapshot) => {
-     if(snapshot === undefined){
-       throw new Error('no data,sorry')
-      }
-      let arr=[]
-    snapshot.docs.forEach((item)=>{
-      //item.data() return the data inside obj
-      const obj = { id: item.id };
-      arr.push(obj)
-    })
-    setSubID([...arr])
-   });
- }catch(err){
-console.log(err.name)
- }
+export const useDocument = (_collection,id) => {
+ const [document, setDocument] = useState(null);
+ const [error, setError] = useState(null);  
+const refDoc=doc(db,_collection,id) 
+useEffect(()=>{
+const unsub = onSnapshot(refDoc,(snapshot)=>{
+if(snapshot.data()){
+setDocument(snapshot.data())
+setError(null)
+}else{
+  setError('document not found')
 }
-    },[_collection])
-    return {subID}
+
+},(err)=>{
+setError("failed to get document");
+ console.log(err.message)
+})
+return ()=>{unsub()}
+},[_collection,id])
+return {error,document}
 };
 

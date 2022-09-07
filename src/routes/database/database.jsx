@@ -8,7 +8,7 @@ import Substance from './Substance';
 import Search from "../../component/input/Search";
 const Database = () => {
 const { openDatabaseNavbar,openDatabaseNavState } = useStyle();
-const { arrayOfDocID } =useCollection('substances')
+const { arrayOfDocID,error } =useCollection('substances')
 const [open,setOpen]=useState(false)
 const [resultOfCollection,setResultOfCollection]=useState(null)
  useEffect(() => {
@@ -34,7 +34,10 @@ setResultOfCollection(arrayOfDocID)
         <Search />
       </nav>
       <div className="database-substances-container">
+      {error&&<p>{error}</p>}
+      {!error&&(
       <SubstancesList substancesID={resultOfCollection} />
+      )}
       </div>
       <Routes>
         <Route path=":id" element={<Substance />} />
