@@ -1,19 +1,27 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect,useReducer } from "react";
 
 export const useSubstance = (document)=>{
-    const [polishedObj,setPolishedObj] =useState({})
+const initObj ={
+doc:''
+};
+const substanceReducer=(state,action)=>{
+
+}
+ const[customObj,dispatch]=useReducer(substanceReducer,initObj)
+
     useEffect(()=>{
      if(document){   
-const createPolishedObj=()=>{
+const createCustomObj=()=>{
+
 //grab all monograph
  const ArrOfMonograph = Object.keys(document);
 }  
-createPolishedObj() 
+createCustomObj() 
 }
-},[polishedObj,document])
+},[document])
 
 
-return{ polishedObj }
+return { customObj };
 }
 
 

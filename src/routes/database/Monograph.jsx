@@ -1,16 +1,16 @@
 
-const Monograph = () => {
+const Monograph = ({Monograph}) => {
   
     return (
-      <div>
-        <form className=" substance-form">
-<div className="monograph-title">
-  <label>
-    <span></span>
-    <input type="text"
-   />
-  </label>
-</div>
+      <div className="substance-form-container">
+        <form className="substance-form">
+          <div className="monograph-title">
+            <h3>{Monograph}</h3>
+          </div>
+          <label>
+            <span></span>
+            <input type="text" />
+          </label>
         </form>
       </div>
     );
