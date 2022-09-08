@@ -1,15 +1,14 @@
 .substance-container{
 width:90%;
  border:2px solid red;
+ @include flx-col();
  & .substance-title{
- text-align:center;
- }
- & .substance-form-container{
-width: 100%;
- display: grid;
-grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
- & .substance-form{
- @include flx-col()
- }   
+     text-align:center;    
+    }
+    & .substance-form{
+display: grid;
+ grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+
 }
+
 }

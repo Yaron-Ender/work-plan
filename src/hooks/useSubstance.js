@@ -1,22 +1,14 @@
 import { useState,useEffect,useReducer } from "react";
 
 export const useSubstance = (document)=>{
-const initObj ={
-doc:''
-};
+
 const substanceReducer=(state,action)=>{
-
+   return {...state,...action.payload}
 }
- const[customObj,dispatch]=useReducer(substanceReducer,initObj)
-
+const[customObj,dispatch]=useReducer(substanceReducer,{})
     useEffect(()=>{
      if(document){   
-const createCustomObj=()=>{
-
-//grab all monograph
- const ArrOfMonograph = Object.keys(document);
-}  
-createCustomObj() 
+dispatch({payload:document})
 }
 },[document])
 
