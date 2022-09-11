@@ -5,7 +5,7 @@ import { useSubstance } from '../../hooks/useSubstance';
 import MonographList from './MonographList';
 const Substance = () => {
   const { id } = useParams();
-  const { error, document } = useDocument("test", id);
+  const { error, document } = useDocument("substances", id);
   const { customObj } = useSubstance(document)
   // Object.keys(document).map((monograph) =>
   // console.log(monograph, document[monograph].GC)
@@ -15,7 +15,7 @@ const Substance = () => {
       <h2 className='substance-title'> {id}</h2>
       {!error && (
         <>
-      <MonographList customObj={customObj} />
+      <MonographList document={document} />
         </>
       )}
     </div>
