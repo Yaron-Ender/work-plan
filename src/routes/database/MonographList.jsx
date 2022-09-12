@@ -1,55 +1,45 @@
 import { useState,useEffect,useReducer } from "react";
-const MonographList = ({ document }) => {
+import { useFriestore } from "../../hooks/useFirestore";
+const MonographList = ({ document,id }) => {
+  const {updateDocument}=useFriestore("substances")
   const[monograph,setMonograph]=useState([]);
-  const[tech,setTech]=useState([]);
+  const[selectedTech,setSelectedTech]=useState(null);
+  
   const randomNum =()=>{
     return Math.random()*10000000
   }
   useEffect(()=>{
     if(document){
-      const findTech=()=>{
-        monograph.map(m=>{
-        }) 
-      }
       const monographArr =()=>{
-        console.log(document)
         Object.keys(document).map((mono) => {
             setMonograph(prev=>[...prev])
           setMonograph(prev=>[...prev,mono])
         });
-        findTech()
-        console.log(monograph)
       }
       monographArr();
     }
   },[document])
-  
-  const monographReducer=(state,action)=>{
- 
-    const {type,payload}=action    
-  
-      }
-      const [state,dispatch]=useReducer(monographReducer,{...document})
-    
 
     const handleSubmit =(e)=>{
       e.preventDefault()
-      
     }
     const handleChange =(e,x)=>{
      let mono=e.target.value
      let arr = monograph
      arr.splice(x,1,mono)
     setMonograph(arr)
-      console.log(monograph)
-
-
 }
-  return (
-    <div className="substance-form">
+const handleUpdate =async (e,mono,tech,index)=>{
+const newVal=e.target.value
+await updateDocument(id,document,mono,tech,index,newVal)
+}
+return (
+  <div className="substance-form">
       {document &&
         Object.keys(document).map((mono, index) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e)=>{
+ handleSubmit()
+          } }>
             <label key={randomNum()}>
               <span>{mono}</span>
               <input
@@ -63,18 +53,23 @@ const MonographList = ({ document }) => {
             </label>
             {Object.keys(document[mono]).map((technology, index) => (
               <div key={randomNum()}>
-               <p>{technology}</p>
-              <ul>
-                {document[mono][technology].map((test,index)=>(
-                <>
+                <p>{technology}</p>
+                <ul>
+              {document[mono][technology].map((test, index) => (
+            <>
                 <li key={randomNum()}>{test}</li>
-               <input type="text" />
-                </>
-                ))}
-              </ul>
+                 <input
+               type="text"
+              onChange={(e) => {
+             handleUpdate(e,mono,technology,index)
+                    
+                    }}
+                />
+            </>
+                  ))}
+                </ul>
               </div>
             ))}
-
             <button>submit</button>
           </form>
         ))}

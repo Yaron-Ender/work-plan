@@ -15,7 +15,7 @@ const Substance = () => {
       <h2 className='substance-title'> {id}</h2>
       {!error && (
         <>
-      <MonographList document={document} />
+      <MonographList document={document} id={id} />
         </>
       )}
     </div>
