@@ -10,11 +10,14 @@ const MonographList = ({ document,id }) => {
   const[doesTextHasChnged,setDoesTextHasChanged]=useState(false)
   const [openMonoIput,setOpenMonoInput]=useState(false)
   const [disabled,setdisabled]=useState(true)
+  const [random,setRandom]=useState(null)
 //open and close input
 const openCloseInput=(e)=>{
  setOpenMonoInput(true)
 setdisabled(false)
-
+}
+const randomNum=()=>{
+return Math.random()
 }
 //send data to useFirestore
 const handleSubmitMonograph=(e)=>{
@@ -43,6 +46,7 @@ await updateDocument(id,mono,tech,index,monographTestNameField)
 //handle with the test field name
 const handleChangeTestName=(e)=>{
   setMonographTestNameField(e.target.value)
+  console.log(e.target.dataset.id)
 }
 return (
   <div className="substance-monograph">
@@ -60,13 +64,10 @@ return (
         className={`${openMonoIput?'open-input':""}`}
         type="text"
         disabled={disabled}
-        //  disabled={`${openMonoIput?'true':'false'}`}
-      //  placeholder={mono}
        name={mono}
        onChange={handleChangeMonoName}
         value={monographfieldText}
                 />
-              {/* <button>save</button> */}
               </label>
             </form>
           </div>
@@ -83,7 +84,7 @@ return (
           <img src={edit} />
           </div> 
          <input
-         data-id={index}
+         data-id={randomNum()}
          type="text"
          value={monographTestNameField}
          name={test}
@@ -91,8 +92,9 @@ return (
         />
         <button>save</button>
        </form>
-                ))}
-              </ul>
+        ))
+      }
+        </ul>
             </div>
           ))}
         </Fragment>
