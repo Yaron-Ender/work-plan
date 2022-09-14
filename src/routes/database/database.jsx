@@ -8,9 +8,9 @@ import Substance from './Substance';
 import Search from "../../component/input/Search";
 const Database = () => {
 const { openDatabaseNavbar,openDatabaseNavState } = useStyle();
-const { arrayOfDocID,error } =useCollection('substances')
 const [open,setOpen]=useState(false)
 const [resultOfCollection,setResultOfCollection]=useState(null)
+const { arrayOfDocID,error } =useCollection('substances')
  useEffect(() => {
    if (openDatabaseNavState) {
    setTimeout(() => {setOpen(true)}, 10);

@@ -1,16 +1,86 @@
 .substance-container{
 width:90%;
  border:2px solid red;
- @include flx-col();
+ display: grid;
+grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+grid-template-rows: 1fr;
  & .substance-title{
      text-align:center;    
     }
-    & .substance-form{
-width:100%;
+& .substance-monograph{
+border:8px solid lemonchiffon;
+padding: 0.5rem;
 display: grid;
-grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
-grid-template-rows: 1fr;
-border:2px solid green;
+grid-template-columns:1fr;
+grid-template-rows:1fr;
+& .mono-title-container{
+    border:5px solid green;
+    // padding:50px;
+& label{
+@include flx-col();
+border:2px solid blue;
+margin: 30px auto;
+position:relative;
+padding: 20px;
+& span{
+@include flx-row();
+position:absolute;
+border:2px solid black;
+top:0;
+left:0;
+width:100%;
+height:100%;
+& img{
+transition:all $base-transition*2;
+opacity: 0;
+border:2px solid red;
+ margin-left: auto;
+ height:$font-size-xl;
+}
+&:hover img{
+opacity: 1;
+cursor: pointer;
+}
+ }
+ & input{
+border:3px solid red;
+ position:absolute;
+top:0;
+left:0;
+ height:100%;
+ width:100%;
+opacity:10;
+transition: all 0.8s;
+&:disabled{
+visibility: hidden;
+}
+ }
+}
+}
+& .single-test-container{
+@include flx-col();
+border:6px solid purple;
+& .test-title-container{
+@include flx-row(flex-start);
+border:2px solid red;
+& img{
+transition:all $base-transition*2;
+opacity: 0;
+border:2px solid red;
+ margin-left: auto;
+ height:$font-size-xl;
+
+}
+&:hover img{
+opacity: 1;
+cursor: pointer;
+}
+}
+}
 }
 
+}
+.open-input{
+transform: translateY(100%);
+opacity:1; 
 }

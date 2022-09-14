@@ -1,75 +1,96 @@
 import { useState,useEffect,Fragment } from "react";
 import { useFriestore } from "../../hooks/useFirestore";
+import  edit from'../../asstes/edit.svg';
+
 const MonographList = ({ document,id }) => {
   const {updateDocument,updateMonograph}=useFriestore("substances",id)
-  const[monograph,setMonograph]=useState([]);
   const[monographfieldText,setMonographfieldText]=useState("");
-  const [Mono,setMono]=useState(null)
-  useEffect(()=>{
-    if(document){
-      const monographArr =()=>{
-        Object.keys(document).map((mono) => {
-            setMonograph(prev=>[...prev])
-          setMonograph(prev=>[...prev,mono])
-        });
-      }
-      monographArr();
-    }
-  },[document])
+  const [MonoName,setMonoName]=useState(null)
+  const[monographTestNameField,setMonographTestNameField]=useState("");
+  const[doesTextHasChnged,setDoesTextHasChanged]=useState(false)
+  const [openMonoIput,setOpenMonoInput]=useState(false)
+  const [disabled,setdisabled]=useState(true)
+//open and close input
+const openCloseInput=(e)=>{
+ setOpenMonoInput(true)
+setdisabled(false)
 
-  const handleSubmit=(e)=>{
-   e.preventDefault();
- updateMonograph(id,monographfieldText,Mono)
-  }
-
-    const handleChange =(e)=>{
-     setMonographfieldText(e.target.value);
-     setMono(e.target.name);
-    
-    //  let mono=e.target.value
-    //  let arr = monograph
-    //  arr.splice(x,1,mono)
-    // setMonograph(arr)
 }
-const handleUpdate =async (e,mono,tech,index)=>{
-const newVal=e.target.value
-await updateDocument(id,document,mono,tech,index,newVal)
+//send data to useFirestore
+const handleSubmitMonograph=(e)=>{
+   e.preventDefault();
+  // move inout to the top and make it disabled
+   setOpenMonoInput(false)
+   setdisabled(true)
+  if(monographfieldText&&
+    doesTextHasChnged){
+  updateMonograph(monographfieldText,MonoName)
+  setDoesTextHasChanged(false)
+  }
+  }
+//handle with the old and the new monograph name
+const handleChangeMonoName =(e)=>{
+     setMonographfieldText(e.target.value);
+     setMonoName(e.target.name);
+     setDoesTextHasChanged(true)
+}
+//send data to fireStore for update the test
+const handleSubmitTest =async (e,mono,tech,index)=>{
+  e.preventDefault();
+
+await updateDocument(id,mono,tech,index,monographTestNameField)
+}
+//handle with the test field name
+const handleChangeTestName=(e)=>{
+  setMonographTestNameField(e.target.value)
 }
 return (
-  <div className="substance-form">
+  <div className="substance-monograph">
     {document &&
+// create the Monograph title
       Object.keys(document).map((mono, index) => (
         <Fragment key={mono}>
-          <div className="mono-title">
-            <form onSubmit={handleSubmit}>
-              <label>
-                <span>{mono}</span>
-                <input
-                  type="text"
-                  name={mono}
-                  placeholder={mono}
-                  onChange={handleChange}
-                  value={monographfieldText}
+        <div className="mono-title-container"> 
+        <form onSubmit={handleSubmitMonograph}>
+        <label>
+          <span>{mono} <img src={edit}
+          onClick={openCloseInput}
+           /></span>
+        <input
+        className={`${openMonoIput?'open-input':""}`}
+        type="text"
+        disabled={disabled}
+        //  disabled={`${openMonoIput?'true':'false'}`}
+      //  placeholder={mono}
+       name={mono}
+       onChange={handleChangeMonoName}
+        value={monographfieldText}
                 />
+              {/* <button>save</button> */}
               </label>
-              <button>save</button>
             </form>
           </div>
-
-          {Object.keys(document[mono]).map((technology, index) => (
-            <div className="single-test" key={index}>
-              <p>{technology}</p>
-              <ul>
-                {document[mono][technology].map((test, index) => (
-                  <Fragment key={index}>
-                    <li>{test}</li>
-                    <input
-                      type="text"
-                      onChange={(e) => {
-                        handleUpdate(e, mono, technology, index);
-                      }}
-                    />
-                  </Fragment>
+      
+  {Object.keys(document[mono]).map((technology, index) => (
+    // create the Test fields
+    <div className="single-test-container" key={index}>
+         <p>{technology}</p>
+           <ul>
+         {document[mono][technology].map((test, index) => (
+           <form key={index} onSubmit={(e)=>{handleSubmitTest(e,mono,technology,index);}}>
+        <div className="test-title-container">
+          <li>{test}</li> 
+          <img src={edit} />
+          </div> 
+         <input
+         data-id={index}
+         type="text"
+         value={monographTestNameField}
+         name={test}
+         onChange={handleChangeTestName}
+        />
+        <button>save</button>
+       </form>
                 ))}
               </ul>
             </div>
