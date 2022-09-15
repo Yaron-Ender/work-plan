@@ -13,9 +13,12 @@ padding: 0.5rem;
 display: grid;
 grid-template-columns:1fr;
 grid-template-rows:1fr;
+//STYLE FOR THE MONOGRAPGH TITLE
 & .mono-title-container{
     border:5px solid green;
-    // padding:50px;
+}
+
+/*cccccccccc*/
 & label{
 @include flx-col();
 border:2px solid blue;
@@ -49,38 +52,43 @@ top:0;
 left:0;
  height:100%;
  width:100%;
-opacity:10;
+opacity:1;
 transition: all 0.8s;
 &:disabled{
 visibility: hidden;
 }
  }
 }
-}
-& .single-test-container{
-@include flx-col();
-border:6px solid purple;
-& .test-title-container{
-@include flx-row(flex-start);
-border:2px solid red;
-& img{
-transition:all $base-transition*2;
-opacity: 0;
-border:2px solid red;
- margin-left: auto;
- height:$font-size-xl;
 
-}
-&:hover img{
-opacity: 1;
-cursor: pointer;
-}
-}
-}
-}
+//STYLE FOR THE MONOGRAPH ITSELF
+// & .single-test-container{
+// @include flx-col();
+// border:6px solid purple;
+// & form{
+// border:3px solid magenta;
+// margin: 30px auto;
+// }
+// & .test-title-container{
+// @include flx-row(flex-start);
+// border:2px solid red;
+// & img{
+// transition:all $base-transition*2;
+// opacity: 0;
+// border:2px solid red;
+//  margin-left: auto;
+//  height:$font-size-xl;
 
+// }
+// &:hover img{
+// opacity: 1;
+// cursor: pointer;
+// }
+// }
+// }
 }
-.open-input{
+.open-input+input{
+background-color: red;
 transform: translateY(100%);
 opacity:1; 
+}
 }

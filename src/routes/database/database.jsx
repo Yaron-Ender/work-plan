@@ -1,5 +1,5 @@
 import { useState,useEffect} from "react";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route,useNavigate} from "react-router-dom";
 import { useCollection } from "../../hooks/useCollection";
 import { useStyle } from '../../hooks/useStyle'
 import Button from "../../component/button/button";
@@ -11,6 +11,7 @@ const { openDatabaseNavbar,openDatabaseNavState } = useStyle();
 const [open,setOpen]=useState(false)
 const [resultOfCollection,setResultOfCollection]=useState(null)
 const { arrayOfDocID,error } =useCollection('substances')
+const navigate=useNavigate()
  useEffect(() => {
    if (openDatabaseNavState) {
    setTimeout(() => {setOpen(true)}, 10);
@@ -21,10 +22,15 @@ const { arrayOfDocID,error } =useCollection('substances')
 const seeAllDoc=()=>{
 setResultOfCollection(arrayOfDocID)
 }
+const createNewSubstance=()=>{
+navigate('/database')
+}
   return (
     <div className="database">
       <nav className={`database-navbar ${(open)?'open':""}`}>
-        <Button children="new substanca" buttontype='substance' />
+        <Button children="new substanca" buttontype='substance'
+        onClick={createNewSubstance}
+        />
 
         <Button
           children="All substance"

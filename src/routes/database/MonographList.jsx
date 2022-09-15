@@ -1,4 +1,4 @@
-import { useState,useEffect,Fragment } from "react";
+import { useState,useEffect,useRef,Fragment } from "react";
 import { useFriestore } from "../../hooks/useFirestore";
 import  edit from'../../asstes/edit.svg';
 
@@ -6,25 +6,27 @@ const MonographList = ({ document,id }) => {
   const {updateDocument,updateMonograph}=useFriestore("substances",id)
   const[monographfieldText,setMonographfieldText]=useState("");
   const [MonoName,setMonoName]=useState(null)
-  const[monographTestNameField,setMonographTestNameField]=useState("");
   const[doesTextHasChnged,setDoesTextHasChanged]=useState(false)
-  const [openMonoIput,setOpenMonoInput]=useState(false)
   const [disabled,setdisabled]=useState(true)
-  const [random,setRandom]=useState(null)
-//open and close input
-const openCloseInput=(e)=>{
- setOpenMonoInput(true)
+  
+  //open and close input
+  const openCloseInput=(e)=>{
+    const el = window.document.querySelectorAll("span");
+   el.forEach((s)=>{ 
+ s.classList.remove('open-input')
+  })
+  e.target.parentElement.classList.add('open-input');
+//  setOpenMonoInput(true)
 setdisabled(false)
 }
-const randomNum=()=>{
-return Math.random()
-}
+
 //send data to useFirestore
 const handleSubmitMonograph=(e)=>{
    e.preventDefault();
   // move inout to the top and make it disabled
-   setOpenMonoInput(false)
+  //  setOpenMonoInput(false)
    setdisabled(true)
+    e.target.children[0].children[0].classList.remove("open-input");
   if(monographfieldText&&
     doesTextHasChnged){
   updateMonograph(monographfieldText,MonoName)
@@ -40,14 +42,13 @@ const handleChangeMonoName =(e)=>{
 //send data to fireStore for update the test
 const handleSubmitTest =async (e,mono,tech,index)=>{
   e.preventDefault();
+ const newTextValue = e.target[0].value;
+await updateDocument(id,mono,tech,index,newTextValue)
+//  setOpenMonoInput(false);
+ setdisabled(true);
+ e.target.children[0].children[0].classList.remove('open-input')
+}
 
-await updateDocument(id,mono,tech,index,monographTestNameField)
-}
-//handle with the test field name
-const handleChangeTestName=(e)=>{
-  setMonographTestNameField(e.target.value)
-  console.log(e.target.dataset.id)
-}
 return (
   <div className="substance-monograph">
     {document &&
@@ -57,11 +58,12 @@ return (
         <div className="mono-title-container"> 
         <form onSubmit={handleSubmitMonograph}>
         <label>
-          <span>{mono} <img src={edit}
+          <span>{mono}
+           <img src={edit}
           onClick={openCloseInput}
            /></span>
         <input
-        className={`${openMonoIput?'open-input':""}`}
+        // className={`${(openMonoIput)?'open-input':""}`}
         type="text"
         disabled={disabled}
        name={mono}
@@ -76,25 +78,25 @@ return (
     // create the Test fields
     <div className="single-test-container" key={index}>
          <p>{technology}</p>
-           <ul>
+           
          {document[mono][technology].map((test, index) => (
-           <form key={index} onSubmit={(e)=>{handleSubmitTest(e,mono,technology,index);}}>
-        <div className="test-title-container">
-          <li>{test}</li> 
-          <img src={edit} />
+           <div key={index}  className="test-title-container">
+          <form onSubmit={(e)=>{handleSubmitTest(e,mono,technology,index)}}>
+            <label>
+          <span>{test}
+          <img src={edit} onClick={openCloseInput}/>
+          </span> 
+          <input
+        type="text"
+        disabled={disabled}
+          name={test}
+         />
+            </label>
+          </form>
           </div> 
-         <input
-         data-id={randomNum()}
-         type="text"
-         value={monographTestNameField}
-         name={test}
-         onChange={handleChangeTestName}
-        />
-        <button>save</button>
-       </form>
         ))
       }
-        </ul>
+      
             </div>
           ))}
         </Fragment>
