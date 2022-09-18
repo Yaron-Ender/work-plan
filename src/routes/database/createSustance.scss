@@ -1,0 +1,27 @@
+.create-substance-container{
+    display:grid;
+ grid-template-columns:0.75fr 1fr 2fr;
+ & .create-pannel{
+border:2px solid blue;
+
+ }
+ & .fillup-tests{
+border:2px solid red;
+& .monographes-container{
+ width:100%;
+ border: 3px solid rebeccapurple;
+ transition:$base-transition;
+ display: none;
+ & .single-monograph{
+ 
+border: 2px solid goldenrod;
+ }
+}
+.show{
+display:block;
+ }
+}
+& .substance-UI{
+    border:2px solid greenyellow;
+}
+}
