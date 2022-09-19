@@ -2,62 +2,78 @@ import React from "react";
 import { createElement,useState } from "react";
 import Button from "../../component/button/button";
 import FormInput from "../../component/input/input.comp";
+import MonoInput from "../../component/input/MonoInput";
 const CreateSubstance = () => {
 //STATES
 const [show,setShow]=useState(false)
-const [monograph,setMonograph]=useState([])
+const [monograph,setMonograph]=useState([])//All the monograpes that the user create
+const [individualMono,setIndividualMono]=useState()
 const arrMono=[];
+
   //FUNCTIONS
   const handleSubmit = (e)=>{
      e.preventDefault()
   }
-  const addInput=(e)=>{
+  const addMonograph=(e)=>{
   arrMono.push(
     {id:Math.random()}
   );
   setMonograph(prev=>[...prev,...arrMono])
-  console.log(monograph)
   setShow(true)
 }
 const removeMonograph=(id)=>{
  setMonograph((prev) => monograph.filter((item) => item.id !== id)); 
 }
     return (
-      <div>
+      <div className="create-Newsubstance-container">
         <h1>Cretae New Substance</h1>
-        <div className="create-substance-container">
-          <div className="create-pannel">
-         <Button onClick={addInput} children={"add monograph"} />
-          </div>
-          <div className="fillup-tests">
-            <form onSubmit={handleSubmit} className="signup-form">
-              <FormInput
-                type="text"
-                id="sustance-title"
-                label="sustance-title"
-                name="sustanceTitle"
-                //  required
+        <form className="signup-form" onSubmit={handleSubmit}>
+          <header>
+            <div className="btn-pannel">
+              <Button onClick={addMonograph} children={"add monograph"} />
+              <Button children={"see preview"} />
+              <Button children={"save monograph"} />
+              <Button children={"delete"} />
+            </div>
+            <FormInput
+              type="text"
+              id="sustance-title"
+              label="sustance-title"
+              name="sustanceTitle"
+              //  required
               />
-              <div className={`${(show)?'show':""} monographes-container`}>
-                {monograph.length>0&&monograph.map(item=>(
-                <div className="single-monograph" key={item.id}>
-                <FormInput />
-                <h3>HPLC</h3>
-                <ul>
-                  <li>imp</li>
-                  <li>ass</li>
-                  <li>organic</li>
-                </ul>
-                <Button
-                onClick={()=>{removeMonograph(item.id)}}
-                children={'remove'} />
-                </div>
-                  ))}
-              </div>
-            </form>
-          </div>
-          <div className="substance-UI"></div>
-        </div>
+          </header>
+              <div className={`${show ? "show" : ""} monographes-container`}>
+           {monograph.length > 0 &&
+            monograph.map((item) => (
+          <div className="singel-monograph" key={item.id}>
+        <h3>HPLC</h3>
+         <MonoInput
+         span='monograph'
+         type='text'
+         value={item.id}
+         />
+         <MonoInput
+         span='edition'
+         type='number'
+         />
+         <MonoInput
+         span='effective date'
+         type='date'
+         />
+       
+         <ul>
+          <li>imp</li>
+          <li>ass</li>
+          <li>organic</li>
+      </ul>
+      <Button onClick={() => {removeMonograph(item.id);}}children={"remove"}/>
+    </div>
+     ))}
+    </div>        
+  
+    <div className="substance-UI"></div>
+        </form>
       </div>
     );
 };

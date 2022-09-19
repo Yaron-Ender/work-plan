@@ -35,6 +35,16 @@ margin: 20px auto;
  transition: 300ms ease all;
  border:0;
  border-bottom:1px solid $secondary;
+ //deleate the arrows from input[type=number]
+ /* Chrome, Safari, Edge, Opera */
+ input::-webkit-outer-spin-button,
+ input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   /* Firefox */
+   input[type=number] {
+     -moz-appearance: textfield;
+   }
+ }
 &:focus{
     outline: none;
 }
@@ -45,15 +55,4 @@ margin: 20px auto;
 .shrink{
  @include shrinkLabel();
 }
-}
-//deleate the arrows from input[type=number]
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
 }

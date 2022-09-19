@@ -1,27 +1,82 @@
-.create-substance-container{
-    display:grid;
- grid-template-columns:0.75fr 1fr 2fr;
- & .create-pannel{
-border:2px solid blue;
+// .create-substance-container{
+//     display:grid;
+//  grid-template-columns:0.75fr 1fr 2fr;
+//  & .create-pannel{
+// border:2px solid blue;
 
- }
- & .fillup-tests{
-border:2px solid red;
-& .monographes-container{
- width:100%;
- border: 3px solid rebeccapurple;
- transition:$base-transition;
- display: none;
- & .single-monograph{
+//  }
+//  & .fillup-tests{
+// border:2px solid red;
+// & .monographes-container{
+//  width:100%;
+//  border: 3px solid rebeccapurple;
+//  transition:$base-transition;
+//  display: none;
+//  & .single-monograph{
  
-border: 2px solid goldenrod;
- }
+// border: 2px solid goldenrod;
+//  }
+// }
+// .show{
+// display:block;
+//  }
+// }
+// & .substance-UI{
+//     border:2px solid greenyellow;
+// }
+// }
+
+// start from the begining
+.create-Newsubstance-container{
+@include flx-col();
+border:2px solid goldenrod;
+width: 100%;
+& form{
+width:90%;
+border:2px solid red;
+display:grid;
+grid-template-columns:1fr;
+grid-template-rows:auto
+
+;
+& header{
+@include flx-col(); 
 }
-.show{
-display:block;
- }
+.monographes-container{
+border:2px solid green;
+display:grid;
+gap:2rem 1rem;
+grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));
+
+& .singel-monograph{
+border:2px solid orange;
+display: flex;
+@include flx-col();
+align-items: center;
+
 }
-& .substance-UI{
-    border:2px solid greenyellow;
+}
+}
+}
+.input-mono-container{
+display: flex;
+@include flx-row();
+& span{
+width: 100%;
+}
+
+ & input{
+width: 100%;
+ border-radius:5px;
+ transition: 300ms ease all;
+ border:2px solid red;
+ border-bottom:1px solid $secondary;
+    &:focus{
+        outline: none;
+    }
+
+    }
+& input[type=number]{
+    appearance:auto;
 }
 }
