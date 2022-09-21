@@ -1,13 +1,13 @@
 import React from "react";
-import { createElement,useState } from "react";
+import { useEffect,useState } from "react";
 import Button from "../../component/button/button";
 import FormInput from "../../component/input/input.comp";
 import MonoInput from "../../component/input/MonoInput";
 import Select from 'react-select'
 const CreateSubstance = () => {
-  const randomID=()=>{
-    return Math.random()
-  }
+  // const randomID=()=>{
+  //   return Math.random()
+  // }
 const technologies =[{value:'HPLC',label:"HPLC"},{value:'WET',label:"WET"},{value:'GC',label:"GC"}]
 //INIT OBJECT
   // const initObj={
@@ -31,19 +31,25 @@ const technologies =[{value:'HPLC',label:"HPLC"},{value:'WET',label:"WET"},{valu
 const [show,setShow]=useState(false)
 const [monograph,setMonograph]=useState([])//All the monograpes that the user create
 const [individualMono,setIndividualMono]=useState('')
-const [techPannel,setTechpannel]=useState([])
+const [techObj,setTechObj]=useState({})
+const [techPannel,setTechpannel]=useState(null)
 const arrMono=[];
+ let arr = [];
+ useEffect(() => {
+  console.log(techPannel)
+    // setTechpannel({[techObj[0]]:'fsdff'})
+ }, [techPannel]);
   //FUNCTIONS
   //
   const handleSubmit = (e)=>{
      e.preventDefault()
   }
   const saveMonograph=()=>{
-    console.log(monograph)
   }
   //add the individual monograph to state that store all the monographes
   const addMonograph=(e)=>{
   const mono = new Mono('','','',[])
+  setTechpannel([])
   console.log(mono)
   setMonograph((prev) => [...prev,mono]);
   setShow(true)
@@ -51,33 +57,34 @@ const arrMono=[];
 }
 //remove spesific monograph from the monogrphs state container
 const removeMonograph=(id)=>{
- setMonograph((prev) => monograph.filter((item) => item.id !== id)); 
+ setMonograph((prev) => prev.filter((item) => item.id !== id)); 
 }
 //handle with input of the monograph
-const handleInput=(e,id)=>{
+const handleMonographInput=(e,id)=>{
 monograph.forEach((item)=>{
   if(item.id===id){
-console.log(item)
 item.monographName=e.target.value
   }
 })
 }
 // handle with the Select comp
-const handleOption= (op,id)=>{
+const handleSelectOption= (op,id)=>{
 //op is the option object that store in array that come from the Select
-  monograph.forEach((item) => {
-    if (item.id === id) {
-  item.tech=[]
-  let arr =[]
-  op.forEach((optionVAlue)=>{
-  item.tech.push(optionVAlue.value)
-})
-arr.push(item.tech)
- setTechpannel({[item.id]:arr})
-// setTechpannel((prev) => prev.push({ [item.id]: item.tech }));
- console.log(techPannel)
-    }
-  });
+monograph.forEach((item) => {
+  if (item.id === id) {
+    item.tech=[]
+    op.forEach((optionVAlue)=>{
+      arr=[]
+    item.tech.push(optionVAlue.value)
+    arr.push(item.tech)
+  })
+}
+});
+setTechObj(prev=>[])
+setTechObj([id,arr])
+setTechpannel(prev=>[])
+ setTechpannel(prev=>[...prev,{[id]:arr}])
+// setTechpannel({[id]:arr})
 }
     return (
       <div className="create-Newsubstance-container">
@@ -110,31 +117,39 @@ arr.push(item.tech)
          span='monograph'
          type='text'
          name='monographName'
-         onChange={(e)=>{handleInput(e,item.id)}}
+         onChange={(e)=>{handleMonographInput(e,item.id)}}
          />
          <MonoInput
          span='edition'
          type='number'
          name='edition'
-        onChange={(e)=>{handleInput(e,item.id)}}
+        onChange={(e)=>{handleMonographInput(e,item.id)}}
          />
          <MonoInput
          span='effective date'
          type='date'
          name='date'
-         onChange={(e)=>{handleInput(e,item.id)}}
+         onChange={(e)=>{handleMonographInput(e,item.id)}}
          />
   {/* tech section */}
        <div className="select-tech">
         <p>select Tech</p>
         <Select
-        onChange={(option)=>{handleOption(option,item.id);}}
+        onChange={(option)=>{handleSelectOption(option,item.id);}}
         options={technologies}
         isMulti
         />
-        {/* {techPannel.length>0 && techPannel.map((tech)=>
-        <p>{tech}</p>
-        )} */}
+          {console.log(techPannel[0])}
+        {techPannel && techPannel.length>0&& techPannel[0][item.id].map((tech)=>(
+          <p>{tech}</p>
+          // <ul>
+          // {(tech[item.id].map(item=>(
+           
+          //    <li>{item}</li>
+          
+          //     )))}
+          // </ul>
+            ))}
        </div>
    
       <Button onClick={() => {removeMonograph(item.id);}}children={"remove"}/>

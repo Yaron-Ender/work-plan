@@ -1,42 +1,18 @@
-// .create-substance-container{
-//     display:grid;
-//  grid-template-columns:0.75fr 1fr 2fr;
-//  & .create-pannel{
-// border:2px solid blue;
 
-//  }
-//  & .fillup-tests{
-// border:2px solid red;
-// & .monographes-container{
-//  width:100%;
-//  border: 3px solid rebeccapurple;
-//  transition:$base-transition;
-//  display: none;
-//  & .single-monograph{
- 
-// border: 2px solid goldenrod;
-//  }
-// }
-// .show{
-// display:block;
-//  }
-// }
-// & .substance-UI{
-//     border:2px solid greenyellow;
-// }
-// }
 
 // start from the begining
 .create-Newsubstance-container{
 @include flx-col();
 border:2px solid goldenrod;
 width: 100%;
+height:100%;
 & form{
+height: 100%;
 width:90%;
 border:2px solid red;
 display:grid;
 grid-template-columns:1fr;
-grid-template-rows:auto
+grid-template-rows:1fr;
 
 ;
 & header{
@@ -47,13 +23,19 @@ border:2px solid green;
 display:grid;
 gap:2rem 1rem;
 grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));
+grid-template-rows:auto;
 
 & .singel-monograph{
 border:2px solid orange;
 display: flex;
 @include flx-col();
 align-items: center;
+& .select-tech{
+margin: 50px auto;
+display: flex;
+@include flx-col();
 
+}
 }
 }
 }

@@ -1,4 +1,5 @@
 .substance-container{
+height: 100vh;
 width:90%;
  border:2px solid red;
  display: grid;
@@ -59,32 +60,6 @@ visibility: hidden;
 }
  }
 }
-
-//STYLE FOR THE MONOGRAPH ITSELF
-// & .single-test-container{
-// @include flx-col();
-// border:6px solid purple;
-// & form{
-// border:3px solid magenta;
-// margin: 30px auto;
-// }
-// & .test-title-container{
-// @include flx-row(flex-start);
-// border:2px solid red;
-// & img{
-// transition:all $base-transition*2;
-// opacity: 0;
-// border:2px solid red;
-//  margin-left: auto;
-//  height:$font-size-xl;
-
-// }
-// &:hover img{
-// opacity: 1;
-// cursor: pointer;
-// }
-// }
-// }
 }
 .open-input+input{
 background-color: red;
