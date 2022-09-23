@@ -4,7 +4,8 @@ const FormInput = ({...otherProps}) => {
 
   return (
     <div className="input-unit">
-      <input className="form-input" {...otherProps} />
+      <input className="form-input" {...otherProps}
+      />
       <label htmlFor={label} className={`${otherProps.value ? "shrink" : ""}`}>
         {label}
       </label>
