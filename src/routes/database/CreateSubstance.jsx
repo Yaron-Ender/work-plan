@@ -6,15 +6,7 @@ import SingelTech from "./SingelTech";
 import MonoInput from "../../component/input/MonoInput";
 import Select from 'react-select'
 const CreateSubstance = () => {
-
 const technologies =[{value:'HPLC',label:"HPLC"},{value:'WET',label:"WET"},{value:'GC',label:"GC"}]
-//INIT OBJECT
-  // const initObj={
-  //  id:randomID(),
-  //   monographName:'',
-  //   monographEdition:'',
-  //   effectiveDate:''
-  // }
   class Mono{
     constructor(name,eddition,date,tech,note){
       this.id=this.id()
@@ -27,7 +19,6 @@ const technologies =[{value:'HPLC',label:"HPLC"},{value:'WET',label:"WET"},{valu
        this.tests={HPLC:['Assay','IMP','Organic'],
                    WET:['IR','K.F'],
                   GC:['Methanol','DMSO']}
-
     }
      id(){ return Math.random()}
      openTextarea(){this.openNote=true}
@@ -44,7 +35,7 @@ const [textareaContent,setTextareaContent]=useState('');
   //
   const handleSubmit = (e)=>{
     e.preventDefault()
-    console.log(monograph)
+    // console.log(monograph)
   
   }
   const saveMonograph=()=>{
@@ -60,7 +51,7 @@ const [textareaContent,setTextareaContent]=useState('');
   const removeMonograph=(id)=>{
     setMonograph((prev) => prev.filter((item) => item.id !== id)); 
   }
-  //handle with input of the monograph
+  //handle with input of the monograph name
   const handleMonographInput=(e,id)=>{
 monograph.forEach((item)=>{
   if(item.id===id){
@@ -80,6 +71,7 @@ monograph.forEach((item) => {
      arr.push(item.tech)
   })
 }
+//test state doesn't do nothing, it just for make the jsx tamplte rerender
  setTest(arr)
 });
 }//end
@@ -169,7 +161,8 @@ const handletextareaContent=(e,id)=>{
           isMulti
         />
         {item.tech.map((technology) => (
-          <SingelTech technology={technology}/>
+        <SingelTech technology={technology}
+        id={item.id}/>
         ))}
       </div>
       {/* textarea */}
@@ -181,7 +174,6 @@ const handletextareaContent=(e,id)=>{
       </p>
       {item['openNote']&&<textarea className="note-textarea"
       onKeyUpCapture={(e)=>{handletextareaContent(e,item.id)}}
-      
       ></textarea>}
       {/* end of textarea */}
       <Button
@@ -193,7 +185,6 @@ const handletextareaContent=(e,id)=>{
     </div>
   ))}
     </div>
-    <div className="substance-UI"></div>
    </form>
 </div>
     );
