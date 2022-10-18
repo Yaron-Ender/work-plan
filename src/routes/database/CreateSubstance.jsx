@@ -1,11 +1,14 @@
 import React from "react";
-import { useEffect,useState } from "react";
+import { useState,useContext } from "react";
 import Button from "../../component/button/button";
 import FormInput from "../../component/input/input.comp";
 import SingelTech from "./SingelTech";
 import MonoInput from "../../component/input/MonoInput";
 import Select from 'react-select'
+import { MonoGraphContext } from "../../context/MonoContext";
 const CreateSubstance = () => {
+const {...state} = useContext(MonoGraphContext)
+console.log(state['HPLC'])
 const technologies =[{value:'HPLC',label:"HPLC"},{value:'WET',label:"WET"},{value:'GC',label:"GC"}]
   class Mono{
     constructor(name,eddition,date,tech,note){
@@ -22,7 +25,6 @@ const technologies =[{value:'HPLC',label:"HPLC"},{value:'WET',label:"WET"},{valu
     }
      id(){ return Math.random()}
      openTextarea(){this.openNote=true}
-     hai(){console.log('VVVVVVVVVVV....')}
   }
 //STATES
 const [show,setShow]=useState(false)
@@ -39,6 +41,7 @@ const [textareaContent,setTextareaContent]=useState('');
   
   }
   const saveMonograph=()=>{
+    console.log(monograph)
   }
   //add the individual monograph to state that store all the monographes
   const addMonograph=(e)=>{
@@ -55,7 +58,19 @@ const [textareaContent,setTextareaContent]=useState('');
   const handleMonographInput=(e,id)=>{
 monograph.forEach((item)=>{
   if(item.id===id){
-item.monographName=e.target.value
+  switch(e.target.name){
+  case 'monographName':
+  item.monographName=e.target.value;
+   break;
+    case 'edition':
+    item.monographEdition= e.target.value;
+    break;
+    case 'date':
+    item.effectiveDate = e.target.value;
+    break;
+    default:
+   return
+  }
   }
 })
 }
@@ -119,20 +134,20 @@ const handletextareaContent=(e,id)=>{
     id="sustance-title"
     label="sustance-title"
     name="sustanceTitle"
-    //  required
-  />
+    />
 </header>
-          <div className={`${show ? "show" : ""} monographes-container`}>
+      <div className={`${show ? "show" : ""} monographes-container`}>
           {monograph.length > 0 &&
     monograph.map((item) => (
-        <div className="singel-monograph" key={item.id}>
+      <div className="singel-monograph" key={item.id}>
         <MonoInput
     span="monograph"
-  type="text"
+    type="text"
     name="monographName"
-    onClick={(e) => {
-    handleMonographInput(e, item.id);
-        }}
+    onKeyUpCapture={(e) => {
+      handleMonographInput(e, item.id);
+    }}
+    required
   />
   <MonoInput
     span="edition"

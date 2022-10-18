@@ -21,7 +21,11 @@ return (
           <Routes>
             <Route path="/" element={<Navbar />}>
                <Route index  element={<Arragment />} />
-              <Route path="/database/*" element={<Database />} />
+           
+              <Route path="/database/*" element=
+              {<Database />}
+              />
+            
               <Route path="workers" element={<Workers />} />
             </Route>
           </Routes>

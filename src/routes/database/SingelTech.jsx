@@ -3,14 +3,17 @@ import { useState, useEffect } from "react";
 import Button from "../../component/button/button";
 import plusSign from "../../asstes/plus.svg"
 const SingelTech = ({technology,id}) => {
-   const [testList,setTestList]=useState([])
+   const initObj={
+      HPLC:[],
+      WET:[],
+      GC:[]
+   }
+   const [testList,setTestList]=useState(initObj)
    const [text,setText]=useState('')
-// useEffect(()=>{
-//    setTestList(prev=>[...prev,{}])
-// },[id])
+
    const handleClick=(e)=>{
-      console.log(text,technology)
-  setTestList((prev) => [...prev, text]);
+  setTestList((prev) =>({...prev,[technology]:[...prev[technology],text]}));
+console.log(testList)
   setText("");
    }
    return (
@@ -18,8 +21,8 @@ const SingelTech = ({technology,id}) => {
    <h3>{technology}</h3>
    <ul>
    {testList&&
-   testList.map(item=>(
-      <li>{item}</li>
+   testList[technology].map(item=>(
+      <li key={item}>{item}</li>
    ))
    }
    </ul>
