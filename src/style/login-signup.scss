@@ -20,6 +20,15 @@ box-shadow:10px 20px 10px -20px map-get($colors,"green"),
 @include flx-col();
 .input-unit{
 position:relative;
+//style for monograph title, see CreateSubstance Comp
+& .substance-title{
+ font: {
+    size:$font-size-xxl;
+  }
+}
+& .substance-title ~ label{
+z-index:-1;
+}
 }
 label{
 position: absolute;
@@ -51,8 +60,10 @@ margin: 20px auto;
 &:focus ~ label{
 @include shrinkLabel();
 }
+
 }
 .shrink{
  @include shrinkLabel();
 }
 }
+

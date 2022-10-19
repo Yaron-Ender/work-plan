@@ -2,7 +2,7 @@ import MonoInput from "../../component/input/MonoInput";
 import { useState, useEffect } from "react";
 import Button from "../../component/button/button";
 import plusSign from "../../asstes/plus.svg"
-const SingelTech = ({technology,id}) => {
+const SingelTech = ({technology,id,updateTests,monograph}) => {
    const initObj={
       HPLC:[],
       WET:[],
@@ -10,19 +10,23 @@ const SingelTech = ({technology,id}) => {
    }
    const [testList,setTestList]=useState(initObj)
    const [text,setText]=useState('')
+useEffect(()=>{
+updateTests(id,testList)
+},[testList])
 
-   const handleClick=(e)=>{
+const handleClick= (e)=>{
   setTestList((prev) =>({...prev,[technology]:[...prev[technology],text]}));
-console.log(testList)
-  setText("");
-   }
+setText("");
+}
    return (
     <div>
    <h3>{technology}</h3>
    <ul>
-   {testList&&
-   testList[technology].map(item=>(
-      <li key={item}>{item}</li>
+   {monograph.length>0&&monograph.map(mono=>(
+   mono.id==id&&
+      mono.tests[technology].map(item=>(
+    <li key={item}>{item}</li>         
+      ))
    ))
    }
    </ul>
